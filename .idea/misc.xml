@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/activity_main.xml" value="0.24512820512820513" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/app_bar_layout.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/fragment_chats.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/fragment_contacts.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/fragment_groups.xml" value="0.23489583333333333" />
       </map>
     </option>
   </component>
