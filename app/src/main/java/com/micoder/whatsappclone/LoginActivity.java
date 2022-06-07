@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private Button LoginButton, PhoneLoginButton;
     private EditText UserEmail, UserPassword;
@@ -34,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        mAuth.getCurrentUser();
 
         InitializeFields();
 
@@ -96,15 +94,6 @@ public class LoginActivity extends AppCompatActivity {
         NeedNewAccountLink = (TextView) findViewById(R.id.need_new_account_link);
         ForgetPasswordLink = (TextView) findViewById(R.id.forget_password_link);
         loadingBar = new ProgressDialog(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (currentUser != null){
-            SendUserToMainActivity();
-        }
     }
 
     private void SendUserToMainActivity() {
