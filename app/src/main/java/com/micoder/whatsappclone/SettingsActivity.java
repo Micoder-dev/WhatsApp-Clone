@@ -14,8 +14,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -47,6 +50,8 @@ public class SettingsActivity extends AppCompatActivity {
                 UpdateSettings();
             }
         });
+
+        RetrieveUserInfo();
 
     }
 
@@ -87,6 +92,39 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+
+    private void RetrieveUserInfo() {
+        RootRef.child("Users").child(currentUserID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name") && (dataSnapshot.hasChild("image")))) {
+                            String retrieveUserName = dataSnapshot.child("name").getValue().toString();
+                            String retrieveStatus = dataSnapshot.child("status").getValue().toString();
+                            String retrieveProfileImage = dataSnapshot.child("image").getValue().toString();
+
+                            userName.setText(retrieveUserName);
+                            userStatus.setText(retrieveStatus);
+                        }
+                        else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))){
+                            String retrieveUserName = dataSnapshot.child("name").getValue().toString();
+                            String retrieveStatus = dataSnapshot.child("status").getValue().toString();
+
+                            userName.setText(retrieveUserName);
+                            userStatus.setText(retrieveStatus);
+                        }
+                        else {
+                            Toast.makeText(SettingsActivity.this, "Please set & update your info...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void SendUserToMainActivity() {
