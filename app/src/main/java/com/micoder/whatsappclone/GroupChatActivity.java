@@ -16,11 +16,14 @@ public class GroupChatActivity extends AppCompatActivity {
     private EditText userMessageinput;
     private ScrollView mScrollView;
     private TextView displayTextMessage;
+    private String currentGroupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
+
+        currentGroupName = getIntent().getExtras().get("groupName").toString();
 
         InitializeFields();
 
@@ -29,7 +32,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private void InitializeFields() {
         mToolbar = (Toolbar) findViewById(R.id.group_chat_bar_layout);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Group Name");
+        getSupportActionBar().setTitle(currentGroupName);
 
         SendMessageButton = (ImageButton) findViewById(R.id.send_message_button);
         userMessageinput = (EditText) findViewById(R.id.input_group_message);
