@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             SendUserToLoginActivity();
         }
         if (item.getItemId() == R.id.main_settings_option){
-            SendUserToSettingsActivity();
+            SendUserToSettingsActivityOptions();
         }
         if (item.getItemId() == R.id.main_find_friends_option){
 
@@ -176,5 +176,9 @@ public class MainActivity extends AppCompatActivity {
         settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(settingsIntent);
         finish();
+    }
+    private void SendUserToSettingsActivityOptions() {
+        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(settingsIntent);
     }
 }
