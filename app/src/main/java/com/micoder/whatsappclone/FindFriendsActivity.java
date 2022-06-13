@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,18 @@ public class FindFriendsActivity extends AppCompatActivity {
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
                         Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
+
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String visit_user_id = getRef(holder.getAdapterPosition()).getKey();
+
+                                Intent profileIntent = new Intent(FindFriendsActivity.this, ProfileActivity.class);
+                                profileIntent.putExtra("visit_user_id", visit_user_id);
+                                startActivity(profileIntent);
+                            }
+                        });
+
                     }
 
                     @NonNull
