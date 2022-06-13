@@ -206,7 +206,7 @@ public class SettingsActivity extends AppCompatActivity {
                             userName.setText(retrieveUserName);
                             userStatus.setText(retrieveStatus);
 
-                            Picasso.get().load(retrieveProfileImage).into(userProfileImage);
+                            Picasso.get().load(retrieveProfileImage).placeholder(R.drawable.profile_image).into(userProfileImage);
                         }
                         else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))){
                             String retrieveUserName = dataSnapshot.child("name").getValue().toString();
