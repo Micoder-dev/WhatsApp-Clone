@@ -123,6 +123,9 @@ public class ProfileActivity extends AppCompatActivity {
                     if (Current_State.equals("new")) {
                         SendChatRequest();
                     }
+                    if (Current_State.equals("request_sent")) {
+                        CancelChatRequest();
+                    }
                 }
             });
         }
@@ -157,4 +160,30 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    private void CancelChatRequest() {
+        ChatRequestRef.child(senderUserID).child(receiverUserID)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            ChatRequestRef.child(receiverUserID).child(senderUserID)
+                                    .removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                SendMessageRequestButton.setEnabled(true);
+                                                Current_State = "new";
+                                                SendMessageRequestButton.setText("Send Message");
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
 }
