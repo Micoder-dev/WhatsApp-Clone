@@ -32,7 +32,9 @@
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
