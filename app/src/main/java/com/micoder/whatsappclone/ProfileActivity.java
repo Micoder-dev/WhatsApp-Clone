@@ -82,7 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                     ManageChatRequest();
-                    
+
                 }
 
             }
@@ -163,6 +163,9 @@ public class ProfileActivity extends AppCompatActivity {
                     if (Current_State.equals("request_received")) {
                         AcceptChatRequest();
                     }
+                    if (Current_State.equals("friends")) {
+                        RemoveSpecificContact();
+                    }
                 }
             });
         }
@@ -171,6 +174,35 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
     }
+
+    private void RemoveSpecificContact() {
+
+        ContactsRef.child(senderUserID).child(receiverUserID)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            ContactsRef.child(receiverUserID).child(senderUserID)
+                                    .removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                SendMessageRequestButton.setEnabled(true);
+                                                Current_State = "new";
+                                                SendMessageRequestButton.setText("Send Message");
+
+                                                DeclineMessageRequestButton.setVisibility(View.INVISIBLE);
+                                                DeclineMessageRequestButton.setEnabled(false);
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+}
 
     private void SendChatRequest() {
         ChatRequestRef.child(senderUserID).child(receiverUserID)
