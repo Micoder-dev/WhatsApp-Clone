@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/drawable/buttons.xml" value="0.161" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/drawable/inputs.xml" value="0.161" />
+        <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/drawable/receiver_messages_layout.xml" value="0.161" />
+        <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/drawable/sender_messages_layout.xml" value="0.176" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/activity_chat.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/activity_find_friends.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/activity_group_chat.xml" value="0.24895833333333334" />
@@ -16,6 +18,7 @@
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/activity_settings.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/app_bar_layout.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/custom_chat_bar.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/custom_messages_layout.xml" value="0.24512820512820513" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/fragment_chats.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/fragment_contacts.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/WhatsApp-Clone/app/src/main/res/layout/fragment_groups.xml" value="0.23489583333333333" />
