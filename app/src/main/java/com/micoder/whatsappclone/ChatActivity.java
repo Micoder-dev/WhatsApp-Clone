@@ -107,7 +107,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void DisplayLastSeen() {
-        RootRef.child("Users").child(messageSenderID)
+        RootRef.child("Users").child(messageReceiverID)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -142,6 +142,8 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        DisplayLastSeen();
 
         RootRef.child("Messages").child(messageSenderID).child(messageReceiverID)
                 .addChildEventListener(new ChildEventListener() {
