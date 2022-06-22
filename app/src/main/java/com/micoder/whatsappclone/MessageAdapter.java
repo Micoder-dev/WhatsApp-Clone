@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         public TextView senderMessageText, receiverMessageText;
         public CircleImageView receiverProfileImage;
+        public ImageView messageSenderPicture, messageReceiverPicture;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +45,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             senderMessageText = (TextView) itemView.findViewById(R.id.sender_message_text);
             receiverMessageText = (TextView) itemView.findViewById(R.id.receiver_message_text);
             receiverProfileImage = (CircleImageView) itemView.findViewById(R.id.message_profile_image);
+            messageReceiverPicture = itemView.findViewById(R.id.message_receiver_image_view);
+            messageSenderPicture = itemView.findViewById(R.id.message_sender_image_view);
         }
     }
 
@@ -87,16 +91,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             }
         });
 
+        messageViewHolder.receiverMessageText.setVisibility(View.GONE);
+        messageViewHolder.receiverProfileImage.setVisibility(View.GONE);
+        messageViewHolder.senderMessageText.setVisibility(View.GONE);
+        messageViewHolder.messageSenderPicture.setVisibility(View.GONE);
+        messageViewHolder.messageReceiverPicture.setVisibility(View.GONE);
+
         if (fromMessageType.equals("text")) {
-            messageViewHolder.receiverMessageText.setVisibility(View.INVISIBLE);
-            messageViewHolder.receiverProfileImage.setVisibility(View.INVISIBLE);
-            messageViewHolder.senderMessageText.setVisibility(View.INVISIBLE);
 
             if (fromUserID.equals(messageSenderID)) {
                 messageViewHolder.senderMessageText.setVisibility(View.VISIBLE);
                 messageViewHolder.senderMessageText.setBackgroundResource(R.drawable.sender_messages_layout);
                 messageViewHolder.senderMessageText.setTextColor(Color.BLACK);
-                messageViewHolder.senderMessageText.setText(messages.getMessage());
+                messageViewHolder.senderMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
             }
             else {
 
@@ -105,7 +112,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
                 messageViewHolder.receiverMessageText.setBackgroundResource(R.drawable.receiver_messages_layout);
                 messageViewHolder.receiverMessageText.setTextColor(Color.BLACK);
-                messageViewHolder.receiverMessageText.setText(messages.getMessage());
+                messageViewHolder.receiverMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
             }
         }
 
