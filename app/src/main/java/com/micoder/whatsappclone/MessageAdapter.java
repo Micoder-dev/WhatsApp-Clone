@@ -131,11 +131,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     Picasso.get().load(messages.getMessage()).into(messageViewHolder.messageReceiverPicture);
                 }
         }
-        else {
+        else if (fromMessageType.equals("pdf") || fromMessageType.equals("docx")) {
             if (fromUserID.equals(messageSenderID)) {
                 messageViewHolder.messageSenderPicture.setVisibility(View.VISIBLE);
 
-                messageViewHolder.messageSenderPicture.setBackgroundResource(R.drawable.file);
+                //messageViewHolder.messageSenderPicture.setBackgroundResource(R.drawable.file);
+                //load your picture link from firbase to avoid the file img bug
+                Picasso.get()
+                        .load("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-78bd0.appspot.com/o/Image_Files%2Ffile.png?alt=media&token=3fc1b123-907a-406e-b37a-5d59f5be342e")
+                        .placeholder(R.drawable.file).into(messageViewHolder.messageSenderPicture);
 
                 messageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -149,7 +153,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 messageViewHolder.receiverProfileImage.setVisibility(View.VISIBLE);
                 messageViewHolder.messageReceiverPicture.setVisibility(View.VISIBLE);
 
-                messageViewHolder.messageReceiverPicture.setBackgroundResource(R.drawable.file);
+                //messageViewHolder.messageReceiverPicture.setBackgroundResource(R.drawable.file);
+                //load your picture link from firbase to avoid the file img bug
+                Picasso.get()
+                        .load("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-78bd0.appspot.com/o/Image_Files%2Ffile.png?alt=media&token=3fc1b123-907a-406e-b37a-5d59f5be342e")
+                        .placeholder(R.drawable.file).into(messageViewHolder.messageReceiverPicture);
 
                 messageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
