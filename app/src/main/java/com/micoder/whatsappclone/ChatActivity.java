@@ -148,6 +148,9 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+        DisplayMessages();
+
     }
 
     private void InitializeControllers() {
@@ -372,46 +375,6 @@ public class ChatActivity extends AppCompatActivity {
                 });
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        RootRef.child("Messages").child(messageSenderID).child(messageReceiverID)
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Messages messages = dataSnapshot.getValue(Messages.class);
-
-                        messagesList.add(messages);
-
-                        messageAdapter.notifyDataSetChanged();
-
-                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-    }
-
     private void SendMessage() {
 
         String messageText = MessageInputText.getText().toString();
@@ -455,6 +418,43 @@ public class ChatActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    public void DisplayMessages() {
+
+        RootRef.child("Messages").child(messageSenderID).child(messageReceiverID)
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        Messages messages = dataSnapshot.getValue(Messages.class);
+
+                        messagesList.add(messages);
+
+                        messageAdapter.notifyDataSetChanged();
+
+                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
 }
