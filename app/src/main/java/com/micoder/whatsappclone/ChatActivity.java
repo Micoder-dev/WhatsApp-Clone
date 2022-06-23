@@ -69,6 +69,7 @@ public class ChatActivity extends AppCompatActivity {
     private Uri fileUri;
     private String saveCurrentTime, saveCurrentDate;
     private ProgressDialog loadingBar;
+    private StorageReference userFileRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class ChatActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         messageSenderID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
+        userFileRef = FirebaseStorage.getInstance().getReference().child("Document_Files");
 
         messageReceiverID = getIntent().getExtras().get("visit_user_id").toString();
         messageReceiverName = getIntent().getExtras().get("visit_user_name").toString();
@@ -221,22 +223,31 @@ public class ChatActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            Map messageFileBody = new HashMap();
-                            messageFileBody.put("message", task.getResult().getMetadata().getReference().getDownloadUrl().toString());
-                            messageFileBody.put("name", fileUri.getLastPathSegment());
-                            messageFileBody.put("type", checker);
-                            messageFileBody.put("from", messageSenderID);
-                            messageFileBody.put("to", messageReceiverID);
-                            messageFileBody.put("messageID", messagePushID);
-                            messageFileBody.put("time", saveCurrentTime);
-                            messageFileBody.put("date", saveCurrentDate);
+                            userFileRef.child(messagePushID+ "." +checker).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    String fileUrl=task.getResult().toString();
 
-                            Map messageBodyDetails = new HashMap();
-                            messageBodyDetails.put(messageSenderRef + "/" + messagePushID, messageFileBody);
-                            messageBodyDetails.put(messageReceiverRef + "/" + messagePushID, messageFileBody);
+                                    Map messageFileBody = new HashMap();
+                                    messageFileBody.put("message", fileUrl);
+                                    messageFileBody.put("name", fileUri.getLastPathSegment());
+                                    messageFileBody.put("type", checker);
+                                    messageFileBody.put("from", messageSenderID);
+                                    messageFileBody.put("to", messageReceiverID);
+                                    messageFileBody.put("messageID", messagePushID);
+                                    messageFileBody.put("time", saveCurrentTime);
+                                    messageFileBody.put("date", saveCurrentDate);
 
-                            RootRef.updateChildren(messageBodyDetails);
-                            loadingBar.dismiss();
+                                    Map messageBodyDetails = new HashMap();
+                                    messageBodyDetails.put(messageSenderRef + "/" + messagePushID, messageFileBody);
+                                    messageBodyDetails.put(messageReceiverRef + "/" + messagePushID, messageFileBody);
+
+                                    RootRef.updateChildren(messageBodyDetails);
+                                    loadingBar.dismiss();
+
+                                }
+                            });
+
 
                         }
 
